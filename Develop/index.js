@@ -26,6 +26,38 @@ const questions = [
             return 'Not Defined';
         },
     },
+    {
+        type: 'input',
+        name: 'installation',
+        message: "List Installation Instructions",
+        default() {
+            return 'N/A';
+        },
+    },
+    {
+        type: 'input',
+        name: 'usage',
+        message: "List Usage Instructions",
+        default() {
+            return 'N/A';
+        },
+    },
+    {
+        type: 'input',
+        name: 'contributors',
+        message: "List Contributors",
+        default() {
+            return 'N/A';
+        },
+    },
+    {
+        type: 'input',
+        name: 'tests',
+        message: "List Tests",
+        default() {
+            return 'N/A';
+        },
+    },
 ]
 
 // TODO: Create a function to write README file
@@ -33,20 +65,27 @@ function writeToFile(fileName, data) {
 
     console.log (data);
     // destructure the object data
-    const { title, description, } = data;
-    console.log ("Title is ", title);
-    console.log ("Description is ", description);
+    const { title, description, installation, usage, contributors, tests } = data;
+    // console.log ("Title is ", title);
+    // console.log ("Description is ", description);
 
-    let line1 = `# ${title}\n\n`;
-    let line2 = `## Description\n${description}`;
-    console.log("Line 2 is ", line2);
-    fs.appendFile(fileName, line1, (err) =>
+    let titleLine = `# ${title}\n\n`;
+    let desciptionLine = `## Description\n ${description}\n\n`;
+    let installationLine = `## Installation\n ${installation}\n\n`;
+    let usageLine = `## Usage\n ${usage}\n\n`;
+    let contributorLine = `## Contributors\n ${contributors}\n\n`;
+
+    // String to hold first section of README contents
+    let firstSection = titleLine+desciptionLine+installationLine+usageLine+contributorLine;
+    console.log("Lines are are ", titleLine+desciptionLine+installationLine+usageLine+contributorLine);
+
+    fs.appendFile(fileName, (firstSection), (err) =>
         err ? console.error(err) : console.log('Success!')
     );
 
-    fs.appendFile(fileName, line2, (err) =>
-        err ? console.error(err) : console.log('Success!')
-    );
+    // fs.appendFile(fileName, line2, (err) =>
+    //     err ? console.error(err) : console.log('Success!')
+    // );
 }
 
 // # <Your-Project-Title>

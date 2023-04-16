@@ -1,7 +1,14 @@
-# ostrich
+# sisters
 
 ## Description
-sldkfj sddjsf peter piper# skldfj
+ count sister and transform them
 
-## Description
-sdlkfs
+## Installation
+ N/A
+
+## Usage
+ N/A
+
+## Contributors
+ me myseof
+
