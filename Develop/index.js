@@ -29,15 +29,23 @@ const questions = [
     {
         type: 'input',
         name: 'installation',
-        message: "List Installation Instructions",
+        message: "List Installation Instructions. Use :wq (enter) when finished",
         default() {
             return 'N/A';
         },
     },
     {
-        type: 'input',
+        type: 'editor',
         name: 'usage',
-        message: "List Usage Instructions",
+        message: "List Usage Instructions. Type into the editor.\n To exit enter :wq (enter) when finished or :q!",
+        //         To issue commands in Vi/Vim, switch to command mode.
+
+        // 1. Press the Esc key.
+
+        // 2. You should see the ––INSERT–– label vanish from the lower-left.
+
+        // 3. To save your changes before you exit, type :w , and then Enter."
+
         default() {
             return 'N/A';
         },
@@ -58,14 +66,100 @@ const questions = [
             return 'N/A';
         },
     },
+    // WHEN I choose a license for my application from a list of options
+    // THEN a badge for that license is added near the top of the README and a notice is added to the section of the README entitled License that explains which license the application is covered under
+    ////////////////////////////
+    {
+        type: "checkbox",
+        message: "Select one license type from choices",
+        name: "license",
+        choices: [
+            {
+                name: "None"
+            },
+            {
+                name: "Apache License 2.0"
+            },
+            {
+                name: "GNU General Public License V3.0"
+            },
+            {
+                name: "MIT License"
+            },
+            {
+                name: "BSD 2-Clause Simplified License"
+            },
+            {
+                name: "BSD 3-Clause New or Revised License"
+            },
+            {
+                name: "Boost Software License"
+            },
+            {
+                name: "Creative Commons Zero v1.0 Universal"
+            },
+            {
+                name: "Eclipse Public License 2.0"
+            },
+            {
+                name: "GNU Affero General Public License v3.0"
+            },
+            {
+                name: "GNU General Public License v2.0"
+            },
+            {
+                name: "GNU Lesser General Public License v2.1"
+            },
+            {
+                name: "Mozilla Public License 2.0"
+            },
+            {
+                name: "The Unlicense"
+            },
+        ],
+        validate: function (answer) {
+            if (answer.length < 1) {
+                return "You must choose at least one license.";
+            } else if (answer.length > 1) {
+                return "You can only choose one license."
+            }
+            return true;
+        }
+    },
+
+    // WHEN I enter my GitHub username
+    // THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
+    {
+        type: 'input',
+        name: 'gitHub',
+        message: "Enter your GitHub username",
+        default() {
+            return 'Not Defined';
+        },
+    },
+
+    //WHEN I enter my email address
+    // THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
+    {
+        type: 'input',
+        name: 'email',
+        message: "Enter your email address",
+        default() {
+            return 'Not Defined';
+        },
+    },
+    // THEN a high-quality, professional README.md is generated with the title of my 
+    // project and sections entitled Description, Table of Contents, Installation, Usage, 
+    // License, Contributing, Tests, and Questions
+    // WHEN I enter my project title
 ]
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
 
-    console.log (data);
+    console.log(data);
     // destructure the object data
-    const { title, description, installation, usage, contributors, tests } = data;
+    const { title, description, installation, usage, contributors, tests, license, gitHub, email } = data;
     // console.log ("Title is ", title);
     // console.log ("Description is ", description);
 
@@ -74,12 +168,21 @@ function writeToFile(fileName, data) {
     let installationLine = `## Installation\n ${installation}\n\n`;
     let usageLine = `## Usage\n ${usage}\n\n`;
     let contributorLine = `## Contributors\n ${contributors}\n\n`;
+    let testsLine = `## Tests\n ${tests}\n\n`;
+    let licenseLine = `## License\n ${license}\n\n`;
+    let gitHubLine = `## GitHub\n github.com/${gitHub}\n\n`;
+    let emailLine = `## Email\n ${email}\n\n`;
+
+
+
+
 
     // String to hold first section of README contents
-    let firstSection = titleLine+desciptionLine+installationLine+usageLine+contributorLine;
-    console.log("Lines are are ", titleLine+desciptionLine+installationLine+usageLine+contributorLine);
+    let firstSection = titleLine + desciptionLine + installationLine + usageLine + contributorLine;
+    let lastSection = testsLine + licenseLine + gitHubLine + emailLine
+    //console.log("Lines are are ", titleLine+desciptionLine+installationLine+usageLine+contributorLine);
 
-    fs.appendFile(fileName, (firstSection), (err) =>
+    fs.appendFile(fileName, (firstSection + lastSection), (err) =>
         err ? console.error(err) : console.log('Success!')
     );
 

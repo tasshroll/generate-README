@@ -1,14 +1,30 @@
-# sisters
+# monkey
 
 ## Description
- count sister and transform them
+ count the monkeys
 
 ## Installation
  N/A
 
 ## Usage
- N/A
+ dkfj
+sdkfjs
+skdjfs
+/A
+
 
 ## Contributors
- me myseof
+ me
+
+## Tests
+ N/A
+
+## License
+ BSD 3-Clause New or Revised License
+
+## GitHub
+ github.com/tasshroll
+
+## Email
+ tsdfj@
 
