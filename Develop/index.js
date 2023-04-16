@@ -26,10 +26,13 @@ function writeToFile(fileName, data) {
     // mode {Number} default = 438 (aka 0666 in Octal)
     // flag {String} default = 'a'
     // callback {Function}
-    console.log ("Writing to File");
-    // fs.appendFile(fileName, data, (err) =>
-    //     err ? console.error(err) : console.log('Success!')
-    // );
+    console.log ("Writing to File with ", data);
+    let line1 = `# ${data.title}`;
+    console.log("Line 1 is ", line1);
+
+    fs.appendFile(fileName, line1, (err) =>
+        err ? console.error(err) : console.log('Success!')
+    );
 }
 
 // # <Your-Project-Title>
@@ -108,7 +111,7 @@ function init() {
         console.log(JSON.stringify(answers, null, '  '));
 
         // Create README using user input
-        writeToFile("test-README.txt", questions);
+        writeToFile("test-README.txt", answers);
     });
 
 }
