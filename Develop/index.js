@@ -14,23 +14,37 @@ const questions = [
             return 'Not Defined';
         },
     },
+    // WHEN I enter a description, installation instructions, usage information, 
+    //        contribution guidelines, and test instructions
+    // THEN this information is added to the sections of the README entitled 
+    //            Description, Installation, Usage, Contributing, and Tests
+    {
+        type: 'input',
+        name: 'description',
+        message: "What's the description of your project?",
+        default() {
+            return 'Not Defined';
+        },
+    },
 ]
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    //     fs.appendFile(filename, data[, options], callback)
-    // filename {String}
-    // data {String | Buffer}
-    // options {Object}
-    // encoding {String | Null} default = 'utf8'
-    // mode {Number} default = 438 (aka 0666 in Octal)
-    // flag {String} default = 'a'
-    // callback {Function}
-    console.log ("Writing to File with ", data);
-    let line1 = `# ${data.title}`;
-    console.log("Line 1 is ", line1);
 
+    console.log (data);
+    // destructure the object data
+    const { title, description, } = data;
+    console.log ("Title is ", title);
+    console.log ("Description is ", description);
+
+    let line1 = `# ${title}\n\n`;
+    let line2 = `## Description\n${description}`;
+    console.log("Line 2 is ", line2);
     fs.appendFile(fileName, line1, (err) =>
+        err ? console.error(err) : console.log('Success!')
+    );
+
+    fs.appendFile(fileName, line2, (err) =>
         err ? console.error(err) : console.log('Success!')
     );
 }
