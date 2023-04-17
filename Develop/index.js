@@ -153,7 +153,44 @@ const questions = [
     // License, Contributing, Tests, and Questions
     // WHEN I enter my project title
 ]
+function getLicense(license) {
 
+    //[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+    console.log("License is ", license[0]);
+    var licenseLine = "";
+    switch (license[0]) {
+        case "Apache License 2.0":
+            licenseLine = `[![License: ${license}%202.0](https://img.shields.io/badge/License-${license}%202.0-yellow.svg)](https://opensource.org/licenses/${license})`
+            //https://img.shields.io/badge/License-Apache%202.0-blue.svg
+            break;
+        case "MIT License":
+            licenseLine = `[![License: ${license}](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n\n`
+            break;
+        default:
+            console.log("no license");
+    }
+    console.log("licenseLine is ", licenseLine);
+    return licenseLine;
+    //     var badgeAPI = `https://img.shields.io/badge/License-${license}-green.svg`;
+    //     //https://img.shields.io/badge/License-{LICENSE_TYPE}-green.svg
+    //     console.log("API is ", badgeAPI);
+    //     fetch(badgeAPI)
+    //         .then(function (response) {
+    //             if (response.ok) {
+    //                 response.json().then(function (data) {
+    //                     console.log("Badge is", data)
+    //                 });
+    //             };
+    //         });
+};
+//<URL>&style<STYLE>https://img.shields.io/endpoint?url=<URL>&style<STYLE>
+
+// https://img.shields.io/endpoint?url=<URL>&style<STYLE></STYLE>}
+// [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]
+// //(https://opensource.org/licenses/MIT)
+
+// This application is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+// };
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
 
@@ -172,14 +209,13 @@ function writeToFile(fileName, data) {
     let licenseLine = `## License\n ${license}\n\n`;
     let gitHubLine = `## GitHub\n github.com/${gitHub}\n\n`;
     let emailLine = `## Email\n ${email}\n\n`;
-
-
-
-
+    var badgeLine = getLicense(license);
+    console.log ("BadgeLine is", badgeLine);
+    //[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
     // String to hold first section of README contents
-    let firstSection = titleLine + desciptionLine + installationLine + usageLine + contributorLine;
-    let lastSection = testsLine + licenseLine + gitHubLine + emailLine
+    let firstSection = titleLine + desciptionLine + installationLine + usageLine + contributorLine + testsLine
+    let lastSection = licenseLine + badgeLine + gitHubLine + emailLine
     //console.log("Lines are are ", titleLine+desciptionLine+installationLine+usageLine+contributorLine);
 
     fs.appendFile(fileName, (firstSection + lastSection), (err) =>
@@ -263,14 +299,18 @@ function writeToFile(fileName, data) {
 function init() {
     console.log("initializing");
     // Ask user questions
+
     inquirer.prompt(questions).then((answers) => {
         console.log(JSON.stringify(answers, null, '  '));
 
         // Create README using user input
-        writeToFile("test-README.txt", answers);
+        writeToFile("README.md", answers);
     });
 
 }
 
 // Function call to initialize app
 init();
+// var license = "MIT"
+// var badge = "";
+// getLicense(license, badge);
