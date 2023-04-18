@@ -242,9 +242,9 @@ function writeToFile(fileName, data) {
     let titleLine = `# ${title}\n\n`;
     let desciptionLine = `## Description\n ${description}\n\n`;
     let tableOfContents = `## Table of Contents\n\n`;
-    //let installationLine = `## Installation\n ${installation}\n\n`;
-    let usageLine = `## Usage\n ${usage}\n\n`;
-    let contributorLine = `## Contributors\n ${contributors}\n\n`;
+    var installationLine = (installation != "N/A") ? `## Installation\n ${installation}\n\n` : "";
+    var usageLine = (usage != "N/A") ? `## Usage\n ${usage}\n\n` : "";
+    var contributorLine = (contributors != "N/A") ? `## Contributors\n ${contributors}\n\n` : ""
     let testsLine = `## Tests\n ${tests}\n\n`;
     let licenseLine = `## License\n ${license}\n\n`;
     let gitHubLine = `## GitHub\n github.com/${gitHub}\n\n`;
