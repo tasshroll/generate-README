@@ -1,8 +1,8 @@
-// TODO: Include packages needed for this application
+// packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-// TODO: Create an array of questions for user input
+// array of questions to prompt the user for
 const questions = [
     // WHEN I enter my project title
     // THEN this is displayed as the title of the README
@@ -35,7 +35,7 @@ const questions = [
         },
     },
     {
-        type: 'editor',
+        type: 'input', // switch back to 'editor',
         name: 'usage',
         message: "List Usage Instructions. Type into the editor.\n To exit enter :wq (enter) when finished or :q!",
         //         To issue commands in Vi/Vim, switch to command mode.
@@ -120,10 +120,13 @@ const questions = [
         validate: function (answer) {
             if (answer.length < 1) {
                 return "You must choose at least one license.";
-            } else if (answer.length > 1) {
-                return "You can only choose one license."
             }
             return true;
+            // uncoment the below code after testing licenses and badges
+            // } else if (answer.length > 1) {
+            //     return "You can only choose one license."
+            // }
+            // return true;
         }
     },
 
@@ -156,18 +159,49 @@ const questions = [
 function getLicense(license) {
 
     //[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+    // The badge URL format for Shields.io is https://img.shields.io/badge/<LABEL>-<MESSAGE>-<COLOR>.svg, 
+    // <LABEL> is the label for the badge, 
+    // <MESSAGE> is the message or text to be displayed, 
+    // <COLOR> is the color of the badge.
+    // Determine message
     console.log("License is ", license[0]);
+    var message = ""
+    var color = "yellow.svg";
     var licenseLine = "";
+    const url = `https://img.shields.io/badge/License`;
+
+    // determine message
     switch (license[0]) {
+        case "None":
+            message = "";
+            licenseLine = "N/A";
+            break;
         case "Apache License 2.0":
-            licenseLine = `[![License: ${license}%202.0](https://img.shields.io/badge/License-${license}%202.0-yellow.svg)](https://opensource.org/licenses/${license})`
+            message = "Apache%202.0"
+            licenseLine = `[![License: ${message}](${url}-${message}-${color})](https://opensource.org/licenses/Apache-2-0)\n\n`
             //https://img.shields.io/badge/License-Apache%202.0-blue.svg
             break;
         case "MIT License":
-            licenseLine = `[![License: ${license}](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n\n`
+            message = "MIT"
+            licenseLine = `[![License: ${license}](${url}-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n\n`
             break;
         default:
-            console.log("no license");
+            console.log("no license selected");
+        // to encode URL, use %20 to replace a space and -- to replace a hyphen
+        //                  name: "None"
+        //message = Apache%202.0      name: "Apache License 2.0"
+        //message = GPL%203.0        name: "GNU General Public License V3.0"
+        //message = MIT     name: "MIT License"
+        //     name: "BSD 2-Clause Simplified License"
+        //     name: "BSD 3-Clause New or Revised License"
+        //     name: "Boost Software License"
+        //     name: "Creative Commons Zero v1.0 Universal"
+        //     name: "Eclipse Public License 2.0"
+        //     name: "GNU Affero General Public License v3.0"
+        //     name: "GNU General Public License v2.0"
+        //     name: "GNU Lesser General Public License v2.1"
+        //     name: "Mozilla Public License 2.0"
+        //     name: "The Unlicense"
     }
     console.log("licenseLine is ", licenseLine);
     return licenseLine;
@@ -197,12 +231,18 @@ function writeToFile(fileName, data) {
     console.log(data);
     // destructure the object data
     const { title, description, installation, usage, contributors, tests, license, gitHub, email } = data;
-    // console.log ("Title is ", title);
-    // console.log ("Description is ", description);
 
+    // if (installation != "N/A") {
+    //     installationLine = `## Installation\n ${installation}\n\n`;
+    // }
+    // Try to use new fancy if then
+    var installationLine = (installation != "N/A") ? `## Installation\n ${installation}\n\n` : "";
+
+    // Define the sections of the ReadMe
     let titleLine = `# ${title}\n\n`;
     let desciptionLine = `## Description\n ${description}\n\n`;
-    let installationLine = `## Installation\n ${installation}\n\n`;
+    let tableOfContents = `## Table of Contents\n\n`;
+    //let installationLine = `## Installation\n ${installation}\n\n`;
     let usageLine = `## Usage\n ${usage}\n\n`;
     let contributorLine = `## Contributors\n ${contributors}\n\n`;
     let testsLine = `## Tests\n ${tests}\n\n`;
@@ -210,12 +250,16 @@ function writeToFile(fileName, data) {
     let gitHubLine = `## GitHub\n github.com/${gitHub}\n\n`;
     let emailLine = `## Email\n ${email}\n\n`;
     var badgeLine = getLicense(license);
-    console.log ("BadgeLine is", badgeLine);
+    console.log("BadgeLine is", badgeLine);
     //[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-    // String to hold first section of README contents
-    let firstSection = titleLine + desciptionLine + installationLine + usageLine + contributorLine + testsLine
-    let lastSection = licenseLine + badgeLine + gitHubLine + emailLine
+    var tableContents;
+    // filter through data 
+    // if a section is N/A, then exclude it from the table of contents
+
+    // Order the sections of our README contents
+    let firstSection = titleLine + desciptionLine + badgeLine + tableOfContents + installationLine + usageLine + contributorLine + testsLine
+    let lastSection = licenseLine + gitHubLine + emailLine
     //console.log("Lines are are ", titleLine+desciptionLine+installationLine+usageLine+contributorLine);
 
     fs.appendFile(fileName, (firstSection + lastSection), (err) =>
