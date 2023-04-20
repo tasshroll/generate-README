@@ -168,7 +168,7 @@ function createBadge(license) {
         case "Apache License 2.0":
             message = "Apache%202.0"
             return `[![License: ${message}](${url1}-${message}-blue.svg)](${url2}Apache-2-0)\n\n`
-            //https://img.shields.io/badge/License-Apache%202.0-blue.svg
+        //https://img.shields.io/badge/License-Apache%202.0-blue.svg
         case "GNU General Public License V3.0":
             message = "GPLv3";
             return `[![License: ${message}](${url1}-${message}-blue.svg)](${url2}GPL-3.0)\n\n`;
@@ -262,13 +262,7 @@ function writeToFile(fileName, data) {
     // destructure the object data
     const { title, description, installation, usage, contributors, tests, license, gitHub, email } = data;
 
-    // if (installation != "N/A") {
-    //     installationLine = `## Installation\n ${installation}\n\n`;
-    // }
-    // Try to use new fancy if then
-    var installationLine = (installation != "N/A") ? `## Installation\n ${installation}\n\n` : "";
-
-    // Assign the sections of ReadMe to the user input
+    // Assign user input to sections of ReadMe
     // If user input is not entered, then omit that section from README
     var titleLine = `# ${title}\n\n`;
     var desciptionLine = `## Description\n ${description}\n\n`;
@@ -277,14 +271,30 @@ function writeToFile(fileName, data) {
     var usageLine = (usage != "N/A") ? `## Usage\n ${usage}\n\n` : "";
     var contributorLine = (contributors != "N/A") ? `## Contributors\n ${contributors}\n\n` : ""
     var testsLine = (tests != "N/A") ? `## Tests\n ${tests}\n\n` : "";
-      var questionsLine = (gitHub != "Not Defined" | email != "Not Defined") 
-    ? `## Questions\n GitHub: ${gitHub}\n Contact me with additional questions at ${email}`
-    : "";
-    let licenseLine = `## License\n ${license}\n\n`;
+
+    var questionsLine = '';
+    if (gitHub !== "Not Defined" || email !== "Not Defined") {
+        questionsLine = '## Questions\n';
+        if (gitHub !== "Not Defined") {
+            questionsLine += `GitHub: ${gitHub}\n`;
+        }
+        if (email !== "Not Defined") {
+            questionsLine += `Contact me with additional questions at ${email}`;
+        }
+    }
+    var licenseLine = `## License\n ${license}\n\n`;
     var badgeLine = (license != "N/A") ? createBadge(license) : "";
     //[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-    var tableContents;
+    var toc = '';
+    if (installation != "") { toc += `[Installation](#installation)\n` };
+    if (usageLine != "") { toc += `[Usage](#usage)\n` };
+    if (contributorLine != "") { toc += `[Contributors](#contributors)\n` };
+    if (licenseLine) { toc += `[License](#license)\n` };
+    if (questionsLine != "") { toc += `[Questions](#questions)\n` };
+    console.log("toc is ", toc);
+    
+
     // - [Installation](#installation)
     // - [Usage](#usage)
     // - [Contributors](#Contributors)
@@ -293,9 +303,19 @@ function writeToFile(fileName, data) {
     // - [Email]
     // filter through data 
     // if a section is N/A, then exclude it from the table of contents
+//     var installationLine = (installation != "N/A") ? `## Installation\n ${installation}\n\n` : "";
+//    var titleLine = `# ${title}\n\n`;
+//     var desciptionLine = `## Description\n ${description}\n\n`;
+//     var tableOfContents = `## Table of Contents\n\n`;
+//     var installationLine = (installation != "None") ? `## Installation\n ${installation}\n\n` : "";
+//     var usageLine = (usage != "N/A") ? `## Usage\n ${usage}\n\n` : "";
+//     var contributorLine = (contributors != "N/A") ? `## Contributors\n ${contributors}\n\n` : ""
+//     var testsLine = (tests != "N/A") ? `## Tests\n ${tests}\n\n` : "";
+//     var questionsLine = '';
+//     let licenseLine = `## License\n ${license}\n\n`;
 
     // Order the sections of our README contents
-    let firstSection = titleLine + desciptionLine + badgeLine + tableOfContents + installationLine + usageLine
+    let firstSection = titleLine + desciptionLine + badgeLine + tableOfContents + toc + installationLine + usageLine
     let lastSection = contributorLine + testsLine + licenseLine + questionsLine
     //console.log("Lines are are ", titleLine+desciptionLine+installationLine+usageLine+contributorLine);
 
