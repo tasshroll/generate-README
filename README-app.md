@@ -1,7 +1,38 @@
-# Project
-Generate a professional README file using command line input from the user.
+# generate-readme
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Description
+ Generate a professional README file using command line input from the user.
 
-This application is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+[![License: MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## Table of Contents
+
+[Installation](#installation)
+
+[Usage](#usage)
+
+[Contributors](#contributors)
+
+[License](#license)
+
+[Questions](#questions)
+
+## Installation
+ run 
+ npm install 
+ npm install inquirer
+
+## Usage
+index.js is entry file
+type "node index.js" at the command line
+
+## Contributors
+ URLs for Git Hub Licenses: https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba
+
+## License
+ MIT License
+
+## Questions
+GitHub: https://github.com/tasshroll
+
+Contact me with additional questions at tasshroll@gmail.com

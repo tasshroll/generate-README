@@ -218,6 +218,7 @@ function createBadge(license) {
             return `[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)\n\n`;
         default:
             console.log("no license selected");
+            return `None`;
         // to encode URL, use %20 to replace a space and -- to replace a hyphen
         //                  name: "None"
         //message = Apache%202.0      name: "Apache License 2.0"
@@ -276,24 +277,34 @@ function writeToFile(fileName, data) {
     if (gitHub !== "Not Defined" || email !== "Not Defined") {
         questionsLine = '## Questions\n';
         if (gitHub !== "Not Defined") {
-            questionsLine += `GitHub: ${gitHub}\n`;
+            questionsLine += `GitHub: https://github.com/${gitHub}\n\n`;
         }
         if (email !== "Not Defined") {
-            questionsLine += `Contact me with additional questions at ${email}`;
+            questionsLine += `Contact me with additional questions at ${email}\n\n`;
         }
     }
-    var licenseLine = `## License\n ${license}\n\n`;
-    var badgeLine = (license != "N/A") ? createBadge(license) : "";
+    // if (licenseLine != "None") {
+    //     var licenseLine = `## License\n ${license}\n\n`;
+    //     var badgeLine = (license != "N/A") ? createBadge(license) : "";
+    // } else {
+    //     var licenseLine = "";
+    //     var badgeLine = "";
+    // }
+    // If user selects a license, display a badge for it
+    var licenseLine = (license !== "None") ? `## License\n ${license}\n\n` : "";
+    var badgeLine = (licenseLine !== "") ? createBadge(license) : "";
+
+
     //[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
     var toc = '';
-    if (installation != "") { toc += `[Installation](#installation)\n` };
-    if (usageLine != "") { toc += `[Usage](#usage)\n` };
-    if (contributorLine != "") { toc += `[Contributors](#contributors)\n` };
-    if (licenseLine) { toc += `[License](#license)\n` };
-    if (questionsLine != "") { toc += `[Questions](#questions)\n` };
+    if (installation != "") { toc += `[Installation](#installation)\n\n` };
+    if (usageLine != "") { toc += `[Usage](#usage)\n\n` };
+    if (contributorLine != "") { toc += `[Contributors](#contributors)\n\n` };
+    if (licenseLine) { toc += `[License](#license)\n\n` };
+    if (questionsLine != "") { toc += `[Questions](#questions)\n\n` };
     console.log("toc is ", toc);
-    
+
 
     // - [Installation](#installation)
     // - [Usage](#usage)
@@ -303,16 +314,16 @@ function writeToFile(fileName, data) {
     // - [Email]
     // filter through data 
     // if a section is N/A, then exclude it from the table of contents
-//     var installationLine = (installation != "N/A") ? `## Installation\n ${installation}\n\n` : "";
-//    var titleLine = `# ${title}\n\n`;
-//     var desciptionLine = `## Description\n ${description}\n\n`;
-//     var tableOfContents = `## Table of Contents\n\n`;
-//     var installationLine = (installation != "None") ? `## Installation\n ${installation}\n\n` : "";
-//     var usageLine = (usage != "N/A") ? `## Usage\n ${usage}\n\n` : "";
-//     var contributorLine = (contributors != "N/A") ? `## Contributors\n ${contributors}\n\n` : ""
-//     var testsLine = (tests != "N/A") ? `## Tests\n ${tests}\n\n` : "";
-//     var questionsLine = '';
-//     let licenseLine = `## License\n ${license}\n\n`;
+    //     var installationLine = (installation != "N/A") ? `## Installation\n ${installation}\n\n` : "";
+    //    var titleLine = `# ${title}\n\n`;
+    //     var desciptionLine = `## Description\n ${description}\n\n`;
+    //     var tableOfContents = `## Table of Contents\n\n`;
+    //     var installationLine = (installation != "None") ? `## Installation\n ${installation}\n\n` : "";
+    //     var usageLine = (usage != "N/A") ? `## Usage\n ${usage}\n\n` : "";
+    //     var contributorLine = (contributors != "N/A") ? `## Contributors\n ${contributors}\n\n` : ""
+    //     var testsLine = (tests != "N/A") ? `## Tests\n ${tests}\n\n` : "";
+    //     var questionsLine = '';
+    //     let licenseLine = `## License\n ${license}\n\n`;
 
     // Order the sections of our README contents
     let firstSection = titleLine + desciptionLine + badgeLine + tableOfContents + toc + installationLine + usageLine
