@@ -225,7 +225,7 @@ const questions = [
 function writeToFile(fileName, data) {
     
     fs.appendFile(fileName, (generateMarkdown(data)), (err) =>
-        err ? console.error(err) : console.log('Success! Open the README in preview mode to see results.')
+        err ? console.error(err) : console.log('Success! Open /Output/README in preview mode to see results.')
     );
 }
 
@@ -238,7 +238,7 @@ function init() {
 
         //console.log(JSON.stringify(userInput, null, '  '));
         // Create README using user input
-        writeToFile("README.md", userInput);
+        writeToFile("./Output/README.md", userInput);
     });
 }
 
