@@ -59,68 +59,141 @@ const questions = [
         },
     },
     // WHEN I choose a license for my application from a list of options
-    // THEN a badge for that license is added near the top of the README and a notice is added to the section of the README entitled License that explains which license the application is covered under
-    ////////////////////////////
-    {
+    // THEN a badge for that license is added near the top of the README and 
+    // a notice is added to the section of the README entitled License that explains which license the application is covered under
+    { // License Object
         type: "list",
         message: "Select one license type below",
         name: "license",
-        choices: [
+        choices: [  // Array of license choices
+            // Hrefs from https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba
             {
-                name: "None"
+                name: "None",
+                value: {
+                    license_name: "n/a",
+                    color: "n/a",
+                    href: "n/a"
+                }
             },
             {
-                name: "Apache License 2.0"
+                name: "Apache License 2.0",
+                value: {
+                    display: "Apache License 2.0",
+                    license_name: "Apache_2.0",
+                    color: "blue",
+                    href: "https://opensource.org/licenses/Apache-2.0"
+                }
             },
             {
-                name: "GNU General Public License V3.0"
+                name: "GNU General Public License V3.0",
+                value: {
+                    display: "GNU General Public License V3.0",
+                    license_name: "GPLv3",
+                    color: "blue",
+                    href: "https://opensource.org/licenses/GPL-3.0"
+                }
             },
             {
-                name: "MIT License"
+                name: "MIT License",
+                value: {
+                    display: "MIT License",
+                    license_name: "MIT",
+                    color: "yellow",
+                    href: "https://opensource.org/licenses/MIT",
+                }
             },
             {
-                name: "BSD 2-Clause Simplified License"
+                name: "BSD 2-Clause Simplified License",
+                value: {
+                    display: "BSD 2-Clause Simplified License",
+                    license_name: "BSD_2--Clause",
+                    color: "orange",
+                    href: "https://opensource.org/licenses/BSD-2-Clause"
+                }
             },
             {
-                name: "BSD 3-Clause New or Revised License"
+                name: "BSD 3-Clause New or Revised License",
+                value: {
+                    display: "BSD 3-Clause New or Revised License",
+                    license_name: "BSD_3--Clause",
+                    color: "blue",
+                    href: "https://opensource.org/licenses/BSD-3-Clause"
+                }
             },
             {
-                name: "Boost Software License"
+                name: "Boost Software License",
+                value: {
+                    display: "Boost Software License",
+                    license_name: "Boost_1.0",
+                    color: "lightblue",
+                    href: "https://www.boost.org/LICENSE_1_0.txt"
+                }
             },
             {
-                name: "Creative Commons Zero v1.0 Universal"
+                name: "Creative Commons Zero v1.0 Universal",
+                value: {
+                    display: "Creative Commons Zero v1.0 Universal",
+                    license_name: "CC0_1.0",
+                    color: "lightgrey",
+                    href: "http://creativecommons.org/publicdomain/zero/1.0/"
+                }
             },
             {
-                name: "Eclipse Public License 2.0"
+                name: "Eclipse Public License 2.0",
+                value: {
+                    display: "Eclipse Public License 2.0",
+                    license_name: "EPL_1.0",
+                    color: "red",
+                    href: "https://opensource.org/licenses/EPL-1.0"
+                }
             },
             {
-                name: "GNU Affero General Public License v3.0"
+                name: "GNU Affero General Public License v3.0",
+                value: {
+                    display: "GNU Affero General Public License v3.0",
+                    license_name: "AGPL_v3",
+                    color: "blue",
+                    href: "https://www.gnu.org/licenses/agpl-3.0"
+                }
             },
             {
-                name: "GNU General Public License v2.0"
+                name: "GNU General Public License v2.0",
+                value: {
+                    display: "GNU General Public License v2.0",
+                    license_name: "GPL_v2",
+                    color: "blue",
+                    href: "https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html"
+                }
             },
             {
-                name: "GNU Lesser General Public License v2.1"
+                name: "GNU Lesser General Public License v2.1",
+                value: {
+                    display: "GNU Lesser General Public License v2.1",
+                    license_name: "LGPL_v3",
+                    color: "blue",
+                    href: "https://www.gnu.org/licenses/lgpl-3.0"
+                }
             },
             {
-                name: "Mozilla Public License 2.0"
+                name: "Mozilla Public License 2.0",
+                value: {
+                    display: "Mozilla Public License 2.0",
+                    license_name: "MPL_2.0",
+                    color: "brightgreen",
+                    href: "https://opensource.org/licenses/MPL-2.0"
+                }
             },
             {
-                name: "The Unlicense"
-            },
-        ],
-        validate: function (answer) {
-            if (answer.length < 1) {
-                return "You must choose at least one license.";
+                name: "The Unlicense",
+                value: {
+                    display: "The Unlicense",
+                    license_name: "Unlicense",
+                    color: "blue",
+                    href: "http://unlicense.org"
+                }
             }
-            return true;
-            // uncoment the below code after testing licenses and badges
-            // } else if (answer.length > 1) {
-            //     return "You can only choose one license."
-            // }
-            // return true;
-        }
-    },
+        ], // END OF Array of license choices
+    }, // END OF License Object
 
     // WHEN I enter my GitHub username
     // THEN this is added to the section of the README entitled Questions, with a link to my GitHub profile
@@ -132,7 +205,6 @@ const questions = [
             return 'Not Defined';
         },
     },
-
     //WHEN I enter my email address
     // THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
     {
@@ -143,134 +215,43 @@ const questions = [
             return 'Not Defined';
         },
     },
+]
+/////////////////////////////////////// END OF Questions ARRAY ////////////////////////
+
+// Create a graphic badge
+function createBadge(license) {
+    // Badge URL format: https://img.shields.io/badge/<LABEL>-<MESSAGE>-<COLOR>.svg, 
+    // <LABEL> is the label for the badge, 
+    // <MESSAGE> is the message or text to be displayed, 
+    // <COLOR> is the color of the badge.
+    console.log("License is ", license);
+    const { display, license_name, color, href } = license;
+
+    console.log('display', display, 'name', license_name, '\n color', color, '\n href', href);
+    return `[![License](https://img.shields.io/badge/License-${license_name}-${color}.svg)](${href})\n\n`;
+} ////////////// END OF createBadge
+
+
+// Write user input to the README file
+function writeToFile(fileName, data) {
     // THEN a high-quality, professional README.md is generated with the title of my 
     // project and sections entitled Description, Table of Contents, Installation, Usage, 
     // License, Contributing, Tests, and Questions
     // WHEN I enter my project title
-]
-function createBadge(license) {
-    //[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-    // The badge URL format for Shields.io is https://img.shields.io/badge/<LABEL>-<MESSAGE>-<COLOR>.svg, 
-    // <LABEL> is the label for the badge, 
-    // <MESSAGE> is the message or text to be displayed, 
-    // <COLOR> is the color of the badge.
-    // Determine message
-    console.log("License is ", license);
-    var message = ""
-    const url1 = `https://img.shields.io/badge/License`;
-    const url2 = `https://opensource.org/licenses/`;
 
-    //https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba
-
-    // get badge
-    // Source is from https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba
-    switch (license) {
-        case "Apache License 2.0":
-            message = "Apache%202.0"
-            return `[![License: ${message}](${url1}-${message}-blue.svg)](${url2}Apache-2-0)\n\n`
-        //https://img.shields.io/badge/License-Apache%202.0-blue.svg
-        case "GNU General Public License V3.0":
-            message = "GPLv3";
-            return `[![License: ${message}](${url1}-${message}-blue.svg)](${url2}GPL-3.0)\n\n`;
-        case "MIT License":
-            message = "MIT"
-            return `[![License: ${license}](${url1}-${message}-yellow.svg)](${url2}MIT)\n\n`
-        case "BSD 2-Clause Simplified License":
-            message = "";
-            return `[![License](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)\n\n`
-        // name: "GNU General Public License V3.0"
-        //     name: "BSD 2-Clause Simplified License"
-        case "BSD 3-Clause New or Revised License":
-            message = "";
-            return `[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)\n\n`
-        //     name: "BSD 3-Clause New or Revised License"
-        //     name: "Boost Software License"
-        case "Boost Software License":
-            message = "Boost_1.0";
-            return `[![License: ${license}](${url1}-${message}-yellow.svg)](https://www.boost.org/LICENSE_1_0.txt)\n\n`
-        //     name: "Creative Commons Zero v1.0 Universal"
-        case "Creative Commons Zero v1.0 Universal":
-            message = "";
-            return `[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)\n\n`;
-        //     name: "Eclipse Public License 2.0"
-        case "Eclipse Public License 2.0":
-            message = "";
-            return `[![License](https://img.shields.io/badge/License-EPL_1.0-red.svg)](https://opensource.org/licenses/EPL-1.0)\n\n`;
-        //     name: "GNU Affero General Public License v3.0"
-        case "GNU Affero General Public License v3.0":
-            message = "";
-            return `[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)\n\n`;
-        //     name: "GNU General Public License v2.0"
-        case "GNU General Public License v2.0":
-            message = "";
-            return `[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)\n\n`;
-        //     name: "GNU Lesser General Public License v2.1"
-        case "GNU Lesser General Public License v2.1":
-            message = "";
-            return `[![License: LGPL v3](https://img.shields.io/badge/License-LGPL_v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)\n\n`;
-        //     name: "Mozilla Public License 2.0"
-        case "Mozilla Public License 2.0":
-            message = "";
-            return `[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)\n\n`;
-        //     name: "The Unlicense"
-        case "The Unlicense":
-            message = "";
-            return `[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)\n\n`;
-        default:
-            console.log("no license selected");
-            return `None`;
-        // to encode URL, use %20 to replace a space and -- to replace a hyphen
-        //                  name: "None"
-        //message = Apache%202.0      name: "Apache License 2.0"
-        //message = GPL%203.0        name: "GNU General Public License V3.0"
-        //message = MIT     name: "MIT License"
-        //     name: "BSD 2-Clause Simplified License"
-        //     name: "BSD 3-Clause New or Revised License"
-        //     name: "Boost Software License"
-        //     name: "Creative Commons Zero v1.0 Universal"
-        //     name: "Eclipse Public License 2.0"
-        //     name: "GNU Affero General Public License v3.0"
-        //     name: "GNU General Public License v2.0"
-        //     name: "GNU Lesser General Public License v2.1"
-        //     name: "Mozilla Public License 2.0"
-        //     name: "The Unlicense"
-    }
-    console.log("licenseLine is ", licenseLine);
-    return licenseLine;
-    //     var badgeAPI = `https://img.shields.io/badge/License-${license}-green.svg`;
-    //     //https://img.shields.io/badge/License-{LICENSE_TYPE}-green.svg
-    //     console.log("API is ", badgeAPI);
-    //     fetch(badgeAPI)
-    //         .then(function (response) {
-    //             if (response.ok) {
-    //                 response.json().then(function (data) {
-    //                     console.log("Badge is", data)
-    //                 });
-    //             };
-    //         });
-};
-//<URL>&style<STYLE>https://img.shields.io/endpoint?url=<URL>&style<STYLE>
-
-// https://img.shields.io/endpoint?url=<URL>&style<STYLE></STYLE>}
-// [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]
-// //(https://opensource.org/licenses/MIT)
-
-// This application is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
-// };
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
     console.log(data);
     // destructure the object data
     const { title, description, installation, usage, contributors, tests, license, gitHub, email } = data;
+    const { display, license_name, color, href } = license;
 
     // Assign user input to sections of ReadMe
     // If user input is not entered, then omit that section from README
     var titleLine = `# ${title}\n\n`;
-    var desciptionLine = `## Description\n ${description}\n\n`;
-    var tableOfContents = `## Table of Contents\n\n`;
-    var installationLine = (installation != "None") ? `## Installation\n ${installation}\n\n` : "";
+    var descLine = `## Description\n ${description}\n\n`;
+    var tableOfCon = `## Table of Contents\n\n`;
+    var installLine = (installation != "None") ? `## Installation\n ${installation}\n\n` : "";
     var usageLine = (usage != "N/A") ? `## Usage\n ${usage}\n\n` : "";
-    var contributorLine = (contributors != "N/A") ? `## Contributors\n ${contributors}\n\n` : ""
+    var contLine = (contributors != "N/A") ? `## Contributors\n ${contributors}\n\n` : ""
     var testsLine = (tests != "N/A") ? `## Tests\n ${tests}\n\n` : "";
 
     var questionsLine = '';
@@ -283,135 +264,41 @@ function writeToFile(fileName, data) {
             questionsLine += `Contact me with additional questions at ${email}\n\n`;
         }
     }
-    // if (licenseLine != "None") {
-    //     var licenseLine = `## License\n ${license}\n\n`;
-    //     var badgeLine = (license != "N/A") ? createBadge(license) : "";
-    // } else {
-    //     var licenseLine = "";
-    //     var badgeLine = "";
+    // if (display!=="None"){
+    //     var badgeLine = createBadge(license);
+    //     var licenseLine = `## License\n This application is licensed under the ${display} license.\n See the ${badgeLine} for more information.\n\n`;
     // }
+    var badgeLine = (display !== "None") ? createBadge(license) : "";
+
     // If user selects a license, display a badge for it
-    var licenseLine = (license !== "None") ? `## License\n ${license}\n\n` : "";
-    var badgeLine = (licenseLine !== "") ? createBadge(license) : "";
+    var licenseLine = (display !== "None") ? `## License\n This application is licensed under the ${display} license.\n See the ${badgeLine} for more information.\n\n` : "";
+    // This application is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+    // };
 
-
-    //[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+    // Make entries under table of contents if data exists for those sections
     var toc = '';
     if (installation != "") { toc += `[Installation](#installation)\n\n` };
     if (usageLine != "") { toc += `[Usage](#usage)\n\n` };
-    if (contributorLine != "") { toc += `[Contributors](#contributors)\n\n` };
+    if (contLine != "") { toc += `[Contributors](#contributors)\n\n` };
     if (licenseLine) { toc += `[License](#license)\n\n` };
     if (questionsLine != "") { toc += `[Questions](#questions)\n\n` };
     console.log("toc is ", toc);
 
-
-    // - [Installation](#installation)
-    // - [Usage](#usage)
-    // - [Contributors](#Contributors)
-    // - [License](#license)
-    // - [GitHub]
-    // - [Email]
-    // filter through data 
-    // if a section is N/A, then exclude it from the table of contents
-    //     var installationLine = (installation != "N/A") ? `## Installation\n ${installation}\n\n` : "";
-    //    var titleLine = `# ${title}\n\n`;
-    //     var desciptionLine = `## Description\n ${description}\n\n`;
-    //     var tableOfContents = `## Table of Contents\n\n`;
-    //     var installationLine = (installation != "None") ? `## Installation\n ${installation}\n\n` : "";
-    //     var usageLine = (usage != "N/A") ? `## Usage\n ${usage}\n\n` : "";
-    //     var contributorLine = (contributors != "N/A") ? `## Contributors\n ${contributors}\n\n` : ""
-    //     var testsLine = (tests != "N/A") ? `## Tests\n ${tests}\n\n` : "";
-    //     var questionsLine = '';
-    //     let licenseLine = `## License\n ${license}\n\n`;
-
-    // Order the sections of our README contents
-    let firstSection = titleLine + desciptionLine + badgeLine + tableOfContents + toc + installationLine + usageLine
-    let lastSection = contributorLine + testsLine + licenseLine + questionsLine
-    //console.log("Lines are are ", titleLine+desciptionLine+installationLine+usageLine+contributorLine);
+    // Order sections of README contents
+    let firstSection = titleLine + descLine + badgeLine + tableOfCon + toc + installLine + usageLine
+    let lastSection = contLine + testsLine + licenseLine + questionsLine
+    //console.log("Lines are are ", titleLine+descLine+installLine+usageLine+contLine);
 
     fs.appendFile(fileName, (firstSection + lastSection), (err) =>
         err ? console.error(err) : console.log('Success!')
     );
-
-    // fs.appendFile(fileName, line2, (err) =>
-    //     err ? console.error(err) : console.log('Success!')
-    // );
 }
 
-// # <Your-Project-Title>
-
-// ## Description
-
-// Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-
-// - What was your motivation?
-// - Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-// - What problem does it solve?
-// - What did you learn?
-
-// ## Table of Contents (Optional)
-
-// If your README is long, add a table of contents to make it easy for users to find what they need.
-
-// - [Installation](#installation)
-// - [Usage](#usage)
-// - [Credits](#credits)
-// - [License](#license)
-
-// ## Installation
-
-// What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
-
-// ## Usage
-
-// Provide instructions and examples for use. Include screenshots as needed.
-
-// To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
-
-//     ```md
-//     ![alt text](assets/images/screenshot.png)
-//     ```
-
-// ## Credits
-
-// List your collaborators, if any, with links to their GitHub profiles.
-
-// If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-// If you followed tutorials, include links to those here as well.
-
-// ## License
-
-// The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
-
-// ---
-
-// 🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-// ## Badges
-
-// ![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
-// Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
-// ## Features
-
-// If your project has a lot of features, list them here.
-
-// ## How to Contribute
-
-// If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
-// ## Tests
 
 // Go the extra mile and write tests for
-
-// TODO: Create a function to initialize app
+// Initialize app
 function init() {
-    console.log("initializing");
-    // Ask user questions
-
+    // Prompt for input 
     inquirer.prompt(questions).then((answers) => {
         console.log(JSON.stringify(answers, null, '  '));
 
@@ -423,6 +310,3 @@ function init() {
 
 // Function call to initialize app
 init();
-// var license = "MIT"
-// var badge = "";
-// createBadge(license, badge);

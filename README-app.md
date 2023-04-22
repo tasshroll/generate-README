@@ -18,16 +18,23 @@
 [Questions](#questions)
 
 ## Installation
- run 
- npm install 
+ In directory where index.js resides, right click the file and choose, "Open In Integrated Terminal" 
+ On command line, type the following:
+ npm install -y
  npm install inquirer
+ npm index.js
+    Answer all the user prompts
+    Open the README.md file by right clicking and choose "Open Preview to view
 
 ## Usage
 index.js is entry file
-type "node index.js" at the command line
+On command line type:
+npm index.js
+    Answer all the user prompts
+    Open the README.md file by right clicking and choose "Open Preview to view
 
 ## Contributors
- URLs for Git Hub Licenses: https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba
+ URLs for Licenses: https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba
 
 ## License
  MIT License
