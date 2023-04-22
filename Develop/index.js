@@ -1,6 +1,7 @@
 // packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 // array of questions to prompt the user for
 const questions = [
@@ -70,6 +71,7 @@ const questions = [
             {
                 name: "None",
                 value: {
+                    display: "n/a",
                     license_name: "n/a",
                     color: "n/a",
                     href: "n/a"
@@ -218,18 +220,16 @@ const questions = [
 ]
 /////////////////////////////////////// END OF Questions ARRAY ////////////////////////
 
-// Create a graphic badge
-function createBadge(license) {
-    // Badge URL format: https://img.shields.io/badge/<LABEL>-<MESSAGE>-<COLOR>.svg, 
-    // <LABEL> is the label for the badge, 
-    // <MESSAGE> is the message or text to be displayed, 
-    // <COLOR> is the color of the badge.
-    console.log("License is ", license);
-    const { display, license_name, color, href } = license;
-
-    console.log('display', display, 'name', license_name, '\n color', color, '\n href', href);
-    return `[![License](https://img.shields.io/badge/License-${license_name}-${color}.svg)](${href})\n\n`;
-} ////////////// END OF createBadge
+// // Create a graphic badge
+// function createBadge(license) {
+//     // Badge URL format: https://img.shields.io/badge/<LABEL>-<MESSAGE>-<COLOR>.svg, 
+//     // <LABEL> is the label for the badge, 
+//     // <MESSAGE> is the message or text to be displayed, 
+//     // <COLOR> is the color of the badge.
+//     const { display, license_name, color, href } = license;
+//     //console.log('display', display, 'name', license_name, '\n color', color, '\n href', href);
+//     return `[![License](https://img.shields.io/badge/License-${license_name}-${color}.svg)](${href})`;
+// } ////////////// END OF createBadge
 
 
 // Write user input to the README file
@@ -238,58 +238,62 @@ function writeToFile(fileName, data) {
     // project and sections entitled Description, Table of Contents, Installation, Usage, 
     // License, Contributing, Tests, and Questions
     // WHEN I enter my project title
+    var markdown = generateMarkdown(data);
+    console.log ("Markdown returned is ", markdown);
 
-    console.log(data);
-    // destructure the object data
-    const { title, description, installation, usage, contributors, tests, license, gitHub, email } = data;
-    const { display, license_name, color, href } = license;
 
-    // Assign user input to sections of ReadMe
-    // If user input is not entered, then omit that section from README
-    var titleLine = `# ${title}\n\n`;
-    var descLine = `## Description\n ${description}\n\n`;
-    var tableOfCon = `## Table of Contents\n\n`;
-    var installLine = (installation != "None") ? `## Installation\n ${installation}\n\n` : "";
-    var usageLine = (usage != "N/A") ? `## Usage\n ${usage}\n\n` : "";
-    var contLine = (contributors != "N/A") ? `## Contributors\n ${contributors}\n\n` : ""
-    var testsLine = (tests != "N/A") ? `## Tests\n ${tests}\n\n` : "";
+//     console.log(data);
+//     // destructure the object data
+//     const { title, description, installation, usage, contributors, tests, license, gitHub, email } = data;
+//     const { display, license_name, color, href } = license;
 
-    var questionsLine = '';
-    if (gitHub !== "Not Defined" || email !== "Not Defined") {
-        questionsLine = '## Questions\n';
-        if (gitHub !== "Not Defined") {
-            questionsLine += `GitHub: https://github.com/${gitHub}\n\n`;
-        }
-        if (email !== "Not Defined") {
-            questionsLine += `Contact me with additional questions at ${email}\n\n`;
-        }
-    }
-    // if (display!=="None"){
-    //     var badgeLine = createBadge(license);
-    //     var licenseLine = `## License\n This application is licensed under the ${display} license.\n See the ${badgeLine} for more information.\n\n`;
-    // }
-    var badgeLine = (display !== "None") ? createBadge(license) : "";
+//     // Assign user input to sections of ReadMe
+//     // If user input is not entered, then omit that section from README
+//     var titleLine = `# ${title}\n\n`;
+//     var descLine = `## Description\n ${description}\n\n`;
+//     var tableOfCon = `## Table of Contents\n\n`;
+//     var installLine = (installation != "N/A") ? `## Installation\n ${installation}\n\n` : "";
+//     var usageLine = (usage != "N/A") ? `## Usage\n ${usage}\n\n` : "";
+//     var contLine = (contributors != "N/A") ? `## Contributors\n ${contributors}\n\n` : ""
+//     var testsLine = (tests != "N/A") ? `## Tests\n ${tests}\n\n` : "";
 
-    // If user selects a license, display a badge for it
-    var licenseLine = (display !== "None") ? `## License\n This application is licensed under the ${display} license.\n See the ${badgeLine} for more information.\n\n` : "";
-    // This application is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
-    // };
+//     var questionsLine = '';
+//     if (gitHub !== "Not Defined" || email !== "Not Defined") {
+//         questionsLine = '## Questions\n';
+//         if (gitHub !== "Not Defined") {
+//             questionsLine += `GitHub: https://github.com/${gitHub}\n\n`;
+//         }
+//         if (email !== "Not Defined") {
+//             questionsLine += `Contact me with additional questions at ${email}\n\n`;
+//         }
+//     }
+//     // if (display!=="None"){
+//     //     var badgeLine = createBadge(license);
+//     //     var licenseLine = `## License\n This application is licensed under the ${display} license.\n See the ${badgeLine} for more information.\n\n`;
+//     // }
+//     var badgeLine = (display !== "n/a") ? createBadge(license) : "";
 
-    // Make entries under table of contents if data exists for those sections
-    var toc = '';
-    if (installation != "") { toc += `[Installation](#installation)\n\n` };
-    if (usageLine != "") { toc += `[Usage](#usage)\n\n` };
-    if (contLine != "") { toc += `[Contributors](#contributors)\n\n` };
-    if (licenseLine) { toc += `[License](#license)\n\n` };
-    if (questionsLine != "") { toc += `[Questions](#questions)\n\n` };
-    console.log("toc is ", toc);
+//     // If user selects a license, display a badge for it
+//     var licenseLine = (display !== "n/a") ? `## License\n This application is licensed under the ${display} license. \n\n See the ${badgeLine} for more information.\n\n` : "";
+//     // This application is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+//     // };
 
-    // Order sections of README contents
-    let firstSection = titleLine + descLine + badgeLine + tableOfCon + toc + installLine + usageLine
-    let lastSection = contLine + testsLine + licenseLine + questionsLine
-    //console.log("Lines are are ", titleLine+descLine+installLine+usageLine+contLine);
+//     // Make entries under table of contents if data exists for those sections
+//     var toc = '';
+//     if (installLine != "") { toc += `[Installation](#installation)\n\n` };
+//     if (usageLine != "") { toc += `[Usage](#usage)\n\n` };
+//     if (contLine != "") { toc += `[Contributors](#contributors)\n\n` };
+//     if (testsLine != "") { toc += `[Tests](#tests)\n\n`};
+//     if (licenseLine) { toc += `[License](#license)\n\n` };
+//     if (questionsLine != "") { toc += `[Questions](#questions)\n\n` };
+//     console.log("toc is ", toc);
 
-    fs.appendFile(fileName, (firstSection + lastSection), (err) =>
+//     // Order sections of README contents
+//     let firstSection = titleLine + descLine + badgeLine +'\n\n' + tableOfCon + toc + installLine + usageLine
+//     let lastSection = contLine + testsLine + licenseLine + questionsLine
+//     //console.log("Lines are are ", titleLine+descLine+installLine+usageLine+contLine);
+
+    fs.appendFile(fileName, (markdown), (err) =>
         err ? console.error(err) : console.log('Success!')
     );
 }
