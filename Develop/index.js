@@ -71,8 +71,8 @@ const questions = [
             {
                 name: "None",
                 value: {
-                    display: "n/a",
-                    license_name: "n/a",
+                    licenseName: "n/a",
+                    message: "n/a",
                     color: "n/a",
                     href: "n/a"
                 }
@@ -80,8 +80,8 @@ const questions = [
             {
                 name: "Apache License 2.0",
                 value: {
-                    display: "Apache License 2.0",
-                    license_name: "Apache_2.0",
+                    licenseName: "Apache License 2.0",
+                    message: "Apache_2.0",
                     color: "blue",
                     href: "https://opensource.org/licenses/Apache-2.0"
                 }
@@ -89,8 +89,8 @@ const questions = [
             {
                 name: "GNU General Public License V3.0",
                 value: {
-                    display: "GNU General Public License V3.0",
-                    license_name: "GPLv3",
+                    licenseName: "GNU General Public License V3.0",
+                    message: "GPLv3",
                     color: "blue",
                     href: "https://opensource.org/licenses/GPL-3.0"
                 }
@@ -98,8 +98,8 @@ const questions = [
             {
                 name: "MIT License",
                 value: {
-                    display: "MIT License",
-                    license_name: "MIT",
+                    licenseName: "MIT License",
+                    message: "MIT",
                     color: "yellow",
                     href: "https://opensource.org/licenses/MIT",
                 }
@@ -107,8 +107,8 @@ const questions = [
             {
                 name: "BSD 2-Clause Simplified License",
                 value: {
-                    display: "BSD 2-Clause Simplified License",
-                    license_name: "BSD_2--Clause",
+                    licenseName: "BSD 2-Clause Simplified License",
+                    message: "BSD_2--Clause",
                     color: "orange",
                     href: "https://opensource.org/licenses/BSD-2-Clause"
                 }
@@ -116,8 +116,8 @@ const questions = [
             {
                 name: "BSD 3-Clause New or Revised License",
                 value: {
-                    display: "BSD 3-Clause New or Revised License",
-                    license_name: "BSD_3--Clause",
+                    licenseName: "BSD 3-Clause New or Revised License",
+                    message: "BSD_3--Clause",
                     color: "blue",
                     href: "https://opensource.org/licenses/BSD-3-Clause"
                 }
@@ -125,8 +125,8 @@ const questions = [
             {
                 name: "Boost Software License",
                 value: {
-                    display: "Boost Software License",
-                    license_name: "Boost_1.0",
+                    licenseName: "Boost Software License",
+                    message: "Boost_1.0",
                     color: "lightblue",
                     href: "https://www.boost.org/LICENSE_1_0.txt"
                 }
@@ -134,8 +134,8 @@ const questions = [
             {
                 name: "Creative Commons Zero v1.0 Universal",
                 value: {
-                    display: "Creative Commons Zero v1.0 Universal",
-                    license_name: "CC0_1.0",
+                    licenseName: "Creative Commons Zero v1.0 Universal",
+                    message: "CC0_1.0",
                     color: "lightgrey",
                     href: "http://creativecommons.org/publicdomain/zero/1.0/"
                 }
@@ -143,8 +143,8 @@ const questions = [
             {
                 name: "Eclipse Public License 2.0",
                 value: {
-                    display: "Eclipse Public License 2.0",
-                    license_name: "EPL_1.0",
+                    licenseName: "Eclipse Public License 2.0",
+                    message: "EPL_1.0",
                     color: "red",
                     href: "https://opensource.org/licenses/EPL-1.0"
                 }
@@ -152,8 +152,8 @@ const questions = [
             {
                 name: "GNU Affero General Public License v3.0",
                 value: {
-                    display: "GNU Affero General Public License v3.0",
-                    license_name: "AGPL_v3",
+                    licenseName: "GNU Affero General Public License v3.0",
+                    message: "AGPL_v3",
                     color: "blue",
                     href: "https://www.gnu.org/licenses/agpl-3.0"
                 }
@@ -161,8 +161,8 @@ const questions = [
             {
                 name: "GNU General Public License v2.0",
                 value: {
-                    display: "GNU General Public License v2.0",
-                    license_name: "GPL_v2",
+                    licenseName: "GNU General Public License v2.0",
+                    message: "GPL_v2",
                     color: "blue",
                     href: "https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html"
                 }
@@ -170,8 +170,8 @@ const questions = [
             {
                 name: "GNU Lesser General Public License v2.1",
                 value: {
-                    display: "GNU Lesser General Public License v2.1",
-                    license_name: "LGPL_v3",
+                    licenseName: "GNU Lesser General Public License v2.1",
+                    message: "LGPL_v3",
                     color: "blue",
                     href: "https://www.gnu.org/licenses/lgpl-3.0"
                 }
@@ -179,8 +179,8 @@ const questions = [
             {
                 name: "Mozilla Public License 2.0",
                 value: {
-                    display: "Mozilla Public License 2.0",
-                    license_name: "MPL_2.0",
+                    licenseName: "Mozilla Public License 2.0",
+                    message: "MPL_2.0",
                     color: "brightgreen",
                     href: "https://opensource.org/licenses/MPL-2.0"
                 }
@@ -188,8 +188,8 @@ const questions = [
             {
                 name: "The Unlicense",
                 value: {
-                    display: "The Unlicense",
-                    license_name: "Unlicense",
+                    licenseName: "The Unlicense",
+                    message: "Unlicense",
                     color: "blue",
                     href: "http://unlicense.org"
                 }
@@ -218,83 +218,14 @@ const questions = [
         },
     },
 ]
-/////////////////////////////////////// END OF Questions ARRAY ////////////////////////
-
-// // Create a graphic badge
-// function createBadge(license) {
-//     // Badge URL format: https://img.shields.io/badge/<LABEL>-<MESSAGE>-<COLOR>.svg, 
-//     // <LABEL> is the label for the badge, 
-//     // <MESSAGE> is the message or text to be displayed, 
-//     // <COLOR> is the color of the badge.
-//     const { display, license_name, color, href } = license;
-//     //console.log('display', display, 'name', license_name, '\n color', color, '\n href', href);
-//     return `[![License](https://img.shields.io/badge/License-${license_name}-${color}.svg)](${href})`;
-// } ////////////// END OF createBadge
+///////////////////////////// END OF Questions ARRAY ////////////////////////
 
 
 // Write user input to the README file
 function writeToFile(fileName, data) {
-    // THEN a high-quality, professional README.md is generated with the title of my 
-    // project and sections entitled Description, Table of Contents, Installation, Usage, 
-    // License, Contributing, Tests, and Questions
-    // WHEN I enter my project title
-    var markdown = generateMarkdown(data);
-    console.log ("Markdown returned is ", markdown);
-
-
-//     console.log(data);
-//     // destructure the object data
-//     const { title, description, installation, usage, contributors, tests, license, gitHub, email } = data;
-//     const { display, license_name, color, href } = license;
-
-//     // Assign user input to sections of ReadMe
-//     // If user input is not entered, then omit that section from README
-//     var titleLine = `# ${title}\n\n`;
-//     var descLine = `## Description\n ${description}\n\n`;
-//     var tableOfCon = `## Table of Contents\n\n`;
-//     var installLine = (installation != "N/A") ? `## Installation\n ${installation}\n\n` : "";
-//     var usageLine = (usage != "N/A") ? `## Usage\n ${usage}\n\n` : "";
-//     var contLine = (contributors != "N/A") ? `## Contributors\n ${contributors}\n\n` : ""
-//     var testsLine = (tests != "N/A") ? `## Tests\n ${tests}\n\n` : "";
-
-//     var questionsLine = '';
-//     if (gitHub !== "Not Defined" || email !== "Not Defined") {
-//         questionsLine = '## Questions\n';
-//         if (gitHub !== "Not Defined") {
-//             questionsLine += `GitHub: https://github.com/${gitHub}\n\n`;
-//         }
-//         if (email !== "Not Defined") {
-//             questionsLine += `Contact me with additional questions at ${email}\n\n`;
-//         }
-//     }
-//     // if (display!=="None"){
-//     //     var badgeLine = createBadge(license);
-//     //     var licenseLine = `## License\n This application is licensed under the ${display} license.\n See the ${badgeLine} for more information.\n\n`;
-//     // }
-//     var badgeLine = (display !== "n/a") ? createBadge(license) : "";
-
-//     // If user selects a license, display a badge for it
-//     var licenseLine = (display !== "n/a") ? `## License\n This application is licensed under the ${display} license. \n\n See the ${badgeLine} for more information.\n\n` : "";
-//     // This application is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
-//     // };
-
-//     // Make entries under table of contents if data exists for those sections
-//     var toc = '';
-//     if (installLine != "") { toc += `[Installation](#installation)\n\n` };
-//     if (usageLine != "") { toc += `[Usage](#usage)\n\n` };
-//     if (contLine != "") { toc += `[Contributors](#contributors)\n\n` };
-//     if (testsLine != "") { toc += `[Tests](#tests)\n\n`};
-//     if (licenseLine) { toc += `[License](#license)\n\n` };
-//     if (questionsLine != "") { toc += `[Questions](#questions)\n\n` };
-//     console.log("toc is ", toc);
-
-//     // Order sections of README contents
-//     let firstSection = titleLine + descLine + badgeLine +'\n\n' + tableOfCon + toc + installLine + usageLine
-//     let lastSection = contLine + testsLine + licenseLine + questionsLine
-//     //console.log("Lines are are ", titleLine+descLine+installLine+usageLine+contLine);
-
-    fs.appendFile(fileName, (markdown), (err) =>
-        err ? console.error(err) : console.log('Success!')
+    
+    fs.appendFile(fileName, (generateMarkdown(data)), (err) =>
+        err ? console.error(err) : console.log('Success! Open the README in preview mode to see results.')
     );
 }
 
@@ -303,13 +234,12 @@ function writeToFile(fileName, data) {
 // Initialize app
 function init() {
     // Prompt for input 
-    inquirer.prompt(questions).then((answers) => {
-        console.log(JSON.stringify(answers, null, '  '));
+    inquirer.prompt(questions).then((userInput) => {
 
+        //console.log(JSON.stringify(userInput, null, '  '));
         // Create README using user input
-        writeToFile("README.md", answers);
+        writeToFile("README.md", userInput);
     });
-
 }
 
 // Function call to initialize app
