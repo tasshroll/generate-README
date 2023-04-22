@@ -3,8 +3,6 @@
 ## Description
  Generate a professional README file using command line input from the user.
 
-[![License: MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 ## Table of Contents
 
 [Installation](#installation)
@@ -32,19 +30,28 @@ To generate a README file, type on command line:
       Answer user prompts
       View created README.md in /Output dir. Choose "Open Preview" to view
 
+## Video
 [Click here for Video demonstration](https://youtu.be/F_ckcr0KID0)
 
-[![ReadME Input]](./img/ReadMe-Input-SS.png)
-[![ReadME Output]](./img/ReadMe-Output-SS.png)
+
+## Screenshots
+### Example User Input
+![Example of user prompts](./Develop/Img/ReadMe-Input-SS.png)
+
+### Example README file
+<img src="./Develop/Img/ReadMe-Output-SS.png" alt="Example of README Generated Output" style="width:50%;">
+
+
 
 ## Contributors
  URL links for Licenses: https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba
+
  Corrado Alfano - tutor
 
 ## License
 N/A
 
 ## Questions
-GitHub: https://github.com/tasshroll
+Link to GitHub repository: https://github.com/tasshroll/generate-README
 
-Contact me with additional questions at tasshroll@gmail.com
+Contact me with additional questions at tasshrollj@gmail.com
