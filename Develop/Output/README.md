@@ -1,9 +1,9 @@
 # kittens
 
 ## Description
- Give kittens a bath and wash off all the dirt
+ wash the dirt of all the kittens in a finite amount of time
 
-[![License](https://img.shields.io/badge/License-Boost_1.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://opensource.org/licenses/GPL-3.0)
 
 ## Table of Contents
 
@@ -16,18 +16,18 @@
 [Questions](#questions)
 
 ## Installation
- Run node index.js at command line
+ run node index.js
 
 ## Usage
- Answer prompts
+ answer the prompts
 
 ## License
- This application is licensed under Boost Software License. 
+ This application is licensed under GNU General Public License V3.0. 
 
  Click license badge for more information.
 
 ## Questions
-GitHub: https://github.com/ts
+GitHub: https://github.com/tasshroll
 
-Contact me with additional questions at example@gmail.com
+Contact me with additional questions at sldkfjs@gmail.com
 
