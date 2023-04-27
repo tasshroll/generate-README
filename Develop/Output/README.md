@@ -1,33 +1,31 @@
-# kittens
+# bugs
 
 ## Description
- wash the dirt of all the kittens in a finite amount of time
+ get bugs from creek
 
-[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://opensource.org/licenses/GPL-3.0)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Table of Contents
 
-[Installation](#installation)
-
 [Usage](#usage)
+
+[Contributors](#contributors)
 
 [License](#license)
 
 [Questions](#questions)
 
-## Installation
- run node index.js
-
 ## Usage
- answer the prompts
+ go the mile
+
+## Contributors
+ me myself
 
 ## License
- This application is licensed under GNU General Public License V3.0. 
+ This application is licensed under Apache License 2.0. 
 
  Click license badge for more information.
 
 ## Questions
 GitHub: https://github.com/tasshroll
-
-Contact me with additional questions at sldkfjs@gmail.com
 
